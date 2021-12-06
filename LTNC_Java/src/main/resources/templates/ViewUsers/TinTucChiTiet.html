@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorate="~{layout/layout_main}">
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div layout:fragment="content-main">
+<section class="sec sec__category">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3 col-sm-3 col-xs-12">
+                    <div class="category__sidebar">
+                        <div class="category__sidebar__box">
+                            <h2 class="sidebar__cat__title"> TIN TỨC LIÊN QUAN</h2>
+                            <div class="news__cat__list" th:each="TinTucLienQuan:${TinTucLienQuan}">
+                                <div class="news__cat__item">
+                                    <div class="news__image">
+                                        <a href="#">
+                                            <img th:src="@{${'/Image/' + TinTucLienQuan['anh']}}" alt="">
+                                        </a>
+                                    </div>
+                                    <h4 class="news__title">
+                                        <a th:href="@{/TinTucChiTiet/{idTin}(idTin=${TinTucLienQuan['idTin']})}" th:text="${TinTucLienQuan['tieuDe']}"></a>
+                                    </h4>
+                                    <div class="news__date">
+                                        <span class="-ap icon icon-access_time"></span>
+                                        <span th:text="${TinTucLienQuan['ngayTao']}"></span>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-9 col-sm-9 col-xs-12" th:each="ChiTietTinTuc:${ChiTietTinTuc}">
+                    <article class="article">
+                        <h1 class="article__title" th:text="${ChiTietTinTuc['tieuDe']}"></h1>
+                        <div class="news__date">
+                            <span class="-ap icon icon-access_time"></span>
+                            <span th:text="${ChiTietTinTuc['ngayTao']}"></span>
+                        </div>
+                        <div class="article__content" th:text="${ChiTietTinTuc['noiDung']}">
+                            
+                        </article>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript" th:src="@{/vendor/js/jquery.2.1.1.min.js}"></script>
+	<script>
+	    $(document).ready(function() {
+	      	$(".catalog__item").removeClass("active");
+	      	$(".layout_menu_blog").addClass("active");
+	      	$("#ViTriXemThemTinTuc").val('0');
+	    });
+
+	</script>
+</div>
+</body>
+</html>

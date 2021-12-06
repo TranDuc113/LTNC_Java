@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorate="~{layout/layout_main}">
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+<div layout:fragment="content-main">
+	<div class="sec sec__shopcart">
+          <div class="container">
+            <div class="nav-steps">
+                <div class="nav-step__item active">
+                    <span class="number">1</span>
+                    <span class="txt">Chọn sản phẩm</span>
+                </div>
+                <div class="nav-step__item waiting">
+                    <span class="number">2</span>
+                    <span class="txt">Nhập thông tin</span>
+                </div>
+                <div class="nav-step__item">
+                    <span class="number">3</span>
+                    <span class="txt">Xác nhận</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="sec__shopcart__info col-md-7 col-sm-7 col-xs-12">
+                    <div class="box-user__info panel">
+                        <div class="title">Thông tin cá nhân</div>
+                        <div class="content">
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12 col-sm-6">
+                                    <div class="form-group">
+                                        <div class="label">Họ tên</div>
+                                        <div class="name"><span th:text="${khachhang.hoten}"></span></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12 col-sm-6">
+                                    <div class="form-group">
+                                        <div class="label">Tài khoản</div>
+                                        <div class="name"><span th:text="${khachhang.tendangnhap}"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="label">Email</div>
+                                <div class="name"><span th:text="${khachhang.email}"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-user__info panel">
+                        <div class="title">Thông tin thanh toán và nhận hàng</div>
+                        <div class="content">
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12 col-sm-6">
+                                    <div class="form-group">
+                                        <div class="label">Số điện thoại:</div>
+                                        <div class="name"><span th:text="${thongtindondathang.txtSDT}"></span></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12 col-sm-6">
+                                    <div class="form-group">
+                                        <div class="label">Họ tên:</div>
+                                        <div class="name"><span th:text="${thongtindondathang.txtTen}"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="label">Email</div>
+                                <div class="name"><span th:text="${thongtindondathang.txtEmail}"></span></div>
+                            </div>
+                            <div class="form-group">
+                                <div class="label">Địa chỉ:</div>
+                                <div class="name"><span th:text="${thongtindondathang.txtDiaChi}"></span></div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 col-xs-12 col-sm-6">
+                                    <div class="form-group">
+                                        <div class="label">Tỉnh thành:</div>
+                                        <div class="name"><span th:text="${thongtindondathang.txtTinhThanh}"></span></div>
+                                    </div>
+                                </div>
+                                <div class="col-md-6 col-xs-12 col-sm-6">
+                                    <div class="form-group">
+                                        <div class="label">Quận huyện:</div>
+                                        <div class="name"><span th:text="${thongtindondathang.txtQuanHuyen}"></span></div>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                <div class="label">Ghi chú:</div>
+                                <div class="name"><span th:text="${thongtindondathang.txtNoiDung}"></span></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="box-user__info panel">
+                        <div class="title">Hình thức thanh toán</div>
+                        <div class="content">
+                            <div class="list-payment">
+                                <div class="item active">
+                           			<th:block th:switch="${thongtindondathang.HinhThucThanhToan}">
+                           				<img src="uploads/payment/bank-transfer.png" alt="" th:case="'1'">
+                           				<img src="uploads/payment/mastercard.png" alt="" th:case="'2'">
+                           				<img src="uploads/payment/paypal.png" alt="" th:case="'3'">
+                           				<img src="uploads/payment/visa.png" alt="" th:case="'4'">
+                           			</th:block>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-5 col-sm-5 col-xs-12">
+                    <div class="title">Giỏ hàng</div>
+                    <div class="content">
+                        <div class="product__shopcart">
+                            <div class="product__list" id="GioHangChiTietRutGon">
+                                
+                            </div>
+                        </div>
+                    </div>
+                    <div class="list-button">
+                        <div class="row">
+                            <div class="col-sm-6 col-xs-12">
+                                <a class="btn btn__back" href="/TienHanhThanhToan">Quay lại</a>
+                            </div>
+                            <div class="col-sm-6 col-xs-12">
+                                <a class="btn btn__next" href="javascript:void(0)" onclick="ThanhThoanThanhCong()">Tiếp tục thanh toán</a>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="text/javascript" src="vendor/js/jquery.2.1.1.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$.get("/ChiTietGioHangRutGon", {}, function (data) {
+				if(data.Icon=="success"){
+					$("#GioHangChiTietRutGon").append(data.Data);
+				}
+			});
+		});
+	</script>
+    </div>
+</div>
+</body>
+</html>

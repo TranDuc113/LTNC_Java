@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorate="~{layout/layout_main}">
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+<link rel="stylesheet" type="text/css" th:href="@{/css/custom.css}">
+</head>
+<body>
+	<div layout:fragment="content-main">
+		<section class="sec sec__product__detail">
+        <div class="container">
+            <div class="row">
+                <div class="product__view__image col-md-6 col-sm-6 col-xs-12">
+                    <div class="row">
+                        <div class="col-sm-9 col-xs-12">
+                            <div class="product__view__image--list">
+                                <a th:each="GetThongTinChiTietSanPham:${GetThongTinChiTietSanPham}" th:href="@{${'/Image/' + GetThongTinChiTietSanPham['anhDaiDien']}}" th:data-fancybox="gallery" class="fancybox">
+                                    <img th:src="@{${'/Image/' + GetThongTinChiTietSanPham['anhDaiDien']}}" class="elevate__zoom" th:data-zoom-image="@{${'/Image/' + GetThongTinChiTietSanPham['anhDaiDien']}}" id="elevate__zoom"  title="product-2">
+                                </a>
+                                <div class="hidden">
+                                    <a th:each="GetAnhSanPham:${GetAnhSanPham}" th:href="@{${'/Image/' + GetAnhSanPham['link']}}" data-fancybox="gallery" class="fancybox">
+                                        <img th:src="@{${'/Image/' + GetAnhSanPham['link']}}" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-3 col-xs-12">
+                            <div class="product__view__image--thumb" id="image-additional-carousel">
+                                <div class="item">
+                                    <a th:each="GetAnhSanPham:${GetAnhSanPham}" th:href="@{${'/Image/' + GetAnhSanPham['link']}}" th:data-image="@{${'/Image/' + GetAnhSanPham['link']}}" class="elevate__zoom">
+                                    	<img th:src="@{${'/Image/' + GetAnhSanPham['link']}}" th:data-zoom-image="@{${'/Image/' + GetAnhSanPham['link']}}" title="product-2" alt="">
+                                    </a>
+                                </div>
+                                <div class="item">
+                                    <a th:each="GetAnhSanPham:${GetAnhSanPham}" th:href="@{${'/Image/' + GetAnhSanPham['link']}}" th:data-image="@{${'/Image/' + GetAnhSanPham['link']}}" class="elevate__zoom">
+                                    	<img th:src="@{${'/Image/' + GetAnhSanPham['link']}}" th:data-zoom-image="@{${'/Image/' + GetAnhSanPham['link']}}" title="product-2" alt="">
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="product__view__content col-md-6 col-sm-6 col-xs-12" th:each="GetThongTinChiTietSanPham:${GetThongTinChiTietSanPham}">
+                    <h2 class="product__view__name" th:text="${GetThongTinChiTietSanPham['ten']}">ĐỒ BƠI 2 MẢNH</h2>
+                    <div class="product__price product__price__view">
+                        <span class="product__price--txt">Giá bán</span> <div class="product__price__regular"><span th:text="${GetThongTinChiTietSanPham['gia']}"></span><span class="unit">đ</span></div> 
+                         <div class="product__price__old"><span th:text="${GetThongTinChiTietSanPham['giaKm']}"></span><span class="unit">đ</span></div>
+                    </div>
+                    <div class="product__view__info">
+                        <p class="info">Thương hiệu : <a href="#" th:text="${GetThongTinChiTietSanPham['tenThuongHieu']}"></a></p>
+                        <p class="info">Tình trạng: <span class="name"th:text="${GetThongTinChiTietSanPham['trangThai']}"></span></p>
+                    </div>
+                    <div class="product__view__desc">
+                        <div class="product__desc__title bold">Mô tả:</div>
+                        <div class="product__shortdesc__txt" th:text="${GetThongTinChiTietSanPham['moTa']}">
+                        </div>
+                    </div>
+					<div class="product__quantity product__view__quantity">
+			            <div class="name">Số lượng:</div>
+			            <button class="btn-minus btn" onclick="GiamSoLuongSanPhamXemNhanh()">
+			                -
+			            </button>
+			            <input type="text" onkeypress="return (event.charCode !=8 && event.charCode ==0 || ( event.charCode == 46 || (event.charCode >= 48 && event.charCode <= 57)))" class="input-number" value="1" id="SoLuongSanPhamXemNhanh">
+			            <button class="btn-plus btn" onclick="TangSoLuongSanPhamXemNhanh()">
+			                +
+			            </button>
+			            <div class="clearfix"></div>
+			        </div>
+                    <a class="product__view__button__cart" th:onclick="'javascript:ThemGioHangXemNhanh(\''+ ${GetThongTinChiTietSanPham['idSp']} +'\');'"><span class="icon fa fa-shopping-bag"></span>Mua ngay</a>
+                </div>
+            </div>
+            <div class="product__detail__content">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-toggle="tab" href="#home">THÔNG TIN SẢN PHẨM</a></li>
+                    <li><a data-toggle="tab" href="#menu1">ĐÁNH GIÁ</a></li>
+                </ul>
+
+                <div class="tab-content">
+                    <div id="home" class="tab-pane fade in active">
+                        <article class="article" th:each="GetThongTinChiTietSanPham:${GetThongTinChiTietSanPham}">
+                            <div class="std" th:utext="${GetThongTinChiTietSanPham['chiTiet']}">
+                            </div>
+                        </article>
+                    </div>
+                    <div id="menu1" class="tab-pane fade">
+	                    <div id="NoiDungPhanHoi">
+		                    <div class="DanhGia" th:each="GetDanhGiaSanPham:${GetDanhGiaSanPham}">
+								  <p style="margin: 0;"><span th:text="${GetDanhGiaSanPham['hoTen']}"></span></p>
+									  <div class="news__date">
+		                                <span class="-ap icon icon-access_time" style="font-size: 12px;"></span>
+		                                <span th:text="${GetDanhGiaSanPham['ngayTao']}" style="font-size: 12px;"></span>
+		                              </div>
+								  <p style="margin: 0;" th:utext="${GetDanhGiaSanPham['noiDung']}"></p>
+							 </div>
+	                    </div>
+	                     
+						<h3 style="font-size: 20px;">Đánh giá sản phẩm </h3>
+						<hr>
+						<textarea name="editor1" id="editor1"></textarea>
+						<div class="form-group" style="text-align: center;margin: 5px;">
+							<input type="hidden" th:value="${sanpham.idsp}" id="IdSanPham"/>
+	                        <button href="#" class="btn btn-primary" onclick="GuiNoiDungPhanHoi()">Gửi</button>
+	                    </div>
+	                    <script src="https://cdn.ckeditor.com/4.17.1/standard/ckeditor.js"></script>
+						<script type="text/javascript" src="/vendor/js/jquery.2.1.1.min.js"></script>
+		                <script>
+		                		function GuiNoiDungPhanHoi(IdSanPham){
+		                			var NoiDungPhanHoi=CKEDITOR.instances.editor1.getData();
+		                			swal.fire({
+		                		        title: '',
+		                		        text: 'Chắc chắn gửi phản hồi này?',
+		                		        icon: 'question',
+		                		        customClass: {
+		                		            confirmButton: 'btn btn-primary ml-2 text-center',
+		                		            cancelButton: 'btn btn-primary ml-2 text-center'
+		                		        },
+		                		        buttonsStyling: false,
+		                		        showCancelButton: true,
+		                		        confirmButtonText: 'Chấp nhận',
+		                		        cancelButtonText: 'Không chấp nhận',
+		                		        reverseButtons: false,
+		                		    })
+	                		        .then((result) => {
+	                		            if (result.value) {
+	                		            	if(NoiDungPhanHoi!='')
+                		            		{
+	                		            		$.post("/GuiNoiDungPhanHoi", { "IdSanPham": $("#IdSanPham").val() ,"NoiDungPhanHoi":NoiDungPhanHoi}, function (data) {
+	                		            			debugger;
+	                		            			if(data.Icon=="success" && data.Data !="error")
+	                		            				{
+	                		            					CKEDITOR.instances['editor1'].setData('');
+	                		            					$("#NoiDungPhanHoi").prepend(data.Data);
+	                		            					MessageBox(data.Title,data.Icon);
+	                		            				}
+	                		            			else if(data.Icon=="error" && data.Data =="error" )
+	                		            				{
+	                		            					MessageBox(data.Title,data.Icon);
+	                		            					$("#login").modal("show");
+	                		            				}
+		                		                });
+                		            		}
+	                		            	else
+                		            		{
+	                		            		MessageBox("Bạn chưa điền nội dung đánh giá","error");
+                		            		}
+	                						
+	                		            }
+	                		        })
+		                		}
+				                $(document).ready(function() {
+				        			$(".catalog__item").removeClass("active");
+				        			$(".layout_menu_sanPham").addClass("active");
+				        		});	
+		                        CKEDITOR.replace( 'editor1' );
+		                </script>
+                    </div>
+                </div>
+            </div>
+            <div class="sec product-list">
+                <div class="product-list__head">
+                    <h2 class="product-list__title">
+                       SẢN PHẨM LIÊN QUAN
+                    </h2>
+                    <div class="nav__slider nav-slider__product">
+                        <div class="nav prev">
+                            <span class="icon fa fa-angle-left"></span>
+                        </div>
+                        <div class="nav next">
+                            <span class="icon fa fa-angle-right"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-list__wrap slider__product">
+                <div class="product__item" th:each="lstSanPhamLienQuan:${lstSanPhamLienQuan}">
+                        <div class="w">
+                            <div class="product__image">
+                                <a href="javascript:void(0)" class="product__link"><img th:src="@{${'/Image/' + lstSanPhamLienQuan['anhDaiDien']}}" alt="name your product"></a>
+                                <div class="product-item__actions">
+                                    <a href="javascript:void(0)" class="btn btn-cart" th:onclick="'javascript:ThemGioHang(\''+ ${lstSanPhamLienQuan['idSp']} +'\');'">Thêm vào giỏ</a>
+                                    <a href="javascript:void(0)" class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết" th:href="@{/SanPhamChiTiet/{IdSanPham}(IdSanPham=${lstSanPhamLienQuan['idSp']})}"><span class="-ap  icon-search2"></span></a>
+                                    <a href="javascript:void(0)" class="btn btn-quickview" data-placement="top" title="Xem nhanh" th:onclick="'javascript:XemNhanhSanPham(\''+ ${lstSanPhamLienQuan['idSp']} +'\')'"><span class="fa fa-eye"></span></a>
+                                </div>
+                                <div class="product__overlay"></div>
+                                <th:block th:if="${lstSanPhamLienQuan['MieuTaSanPhamNoiBat']=='HOT'}">
+                                	<div class="product__status -hot" th:text="${lstSanPhamLienQuan['MieuTaSanPhamNoiBat']}"></div>
+                                </th:block>
+                                <th:block th:if="${lstSanPhamLienQuan['MieuTaSanPhamNoiBat']=='NEW'}">
+                                	<div class="product__status -new" th:text="${lstSanPhamLienQuan['MieuTaSanPhamNoiBat']}"></div>
+                                </th:block>
+                                <th:block th:if="${lstSanPhamLienQuan['MieuTaSanPhamNoiBat']!='NEW'} and ${lstSanPhamLienQuan['MieuTaSanPhamNoiBat']!='HOT'} and ${lstSanPhamLienQuan['MieuTaSanPhamNoiBat']!=null}">
+                                	<div class="product__sale" th:text="${lstSanPhamLienQuan['MieuTaSanPhamNoiBat']}"></div>
+                                </th:block>
+                                
+                            </div>
+                            <h3 class="product__name"><a th:href="@{/SanPhamChiTiet/{IdSanPham}(IdSanPham=${lstSanPhamLienQuan['idSp']})}" th:text="${lstSanPhamLienQuan.ten}"></a></h3>
+                            <div class="product__price">
+	                            <th:block th:if="${lstSanPhamLienQuan['giaKm']}">
+	                            	<div class="product__price__old"><span th:text="${lstSanPhamLienQuan['giaKm']}"></span><span class="unit">đ</span></div>
+	                            </th:block>
+	                            <div class="product__price__regular"><span th:text="${lstSanPhamLienQuan['gia']}"></span><span class="unit">đ</span></div>
+                            </div>
+                        </div>
+                    </div>
+                
+            </div>
+        </div>
+    </section>
+		
+	</div>
+</body>
+</html>

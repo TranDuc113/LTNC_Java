@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+layout:decorate="~{layout/layout_main}">
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<div layout:fragment="content-main">
+		<input type="hidden" value="0" id="ViTriXemThemTinTuc"/>
+		<input type="hidden" th:attr="value = ${SoLuongTinTuc}" id="SoLuongTinTuc"/>
+		<section class="sec sec__category">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-xs-12">
+                    <h2 class="title__main"><span>TIN TỨC</span></h2>
+                    <div class="news__cat__list" id="DanhSach_TinTuc">
+                        <div class="news__cat__item"  th:each="DanhSachTinTuc:${DanhSachTinTuc}">
+                            <div class="news__image">
+                                <a th:href="@{/TinTucChiTiet/{idTin}(idTin=${DanhSachTinTuc['idTin']})}">
+                                    <img th:src="@{${'Image/' + DanhSachTinTuc['anh']}}" alt="">
+                                </a>
+                            </div>
+                            <h4 class="news__title">
+                                <a th:href="@{/TinTucChiTiet/{idTin}(idTin=${DanhSachTinTuc['idTin']})}" th:text="${DanhSachTinTuc['tieuDe']}"></a>
+                            </h4>
+                            <div class="news__date">
+                                <span class="-ap icon icon-access_time"></span>
+                                <span th:text="${DanhSachTinTuc['ngayTao']}"></span>
+                            </div>
+                            <div class="news__shortdesc" style="display: -webkit-box;max-width: 100%;-webkit-line-clamp: 4;-webkit-box-orient: vertical;overflow: hidden;" th:text="${DanhSachTinTuc['noiDung']}">
+                                
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row AnHienLoad" id="LoadingTinTuc" style="text-align: center;">
+            	<img src="Image/Load1.gif"/ style="width: 2%;">
+            </div>
+            <div class="row" style="text-align: center;" id="XemThemTinTuc">
+            	<button href="#" class="btn btn-primary" onclick="XemThemTinTuc()">Xem thêm</button>
+            </div>
+        </div>
+    </section>
+    <script type="text/javascript" src="vendor/js/jquery.2.1.1.min.js"></script>
+	<script>
+	    $(document).ready(function() {
+	      	$(".catalog__item").removeClass("active");
+	      	$(".layout_menu_blog").addClass("active");
+	      	$("#ViTriXemThemTinTuc").val('0');
+	    });
+	    
+	    function XemThemTinTuc(){
+	    	$("#LoadingTinTuc").removeClass("AnHienLoad");
+	    	var ViTri=parseInt($("#ViTriXemThemTinTuc").val());
+	    	var SoLuongSanPham=parseInt($("#SoLuongTinTuc").val());
+	    	
+	    	var solamtron=(SoLuongSanPham/8).toFixed()
+	    	if(solamtron < SoLuongSanPham/8)
+	    	{
+	    		solamtron=solamtron+1;
+	    	}
+	    	if(ViTri<=solamtron)
+	    	{
+	    		ViTri=ViTri+1;
+	    		$("#ViTriXemThemTinTuc").val(ViTri);
+	    		$.get("/XemThemTinTuc", {"ViTri":ViTri}, function (data) {
+	    				$("#DanhSach_TinTuc").append(data);
+	    				$("#LoadingTinTuc").addClass("AnHienLoad");
+	    				if(ViTri=solamtron)
+	    				{
+	    					$("#XemThemTinTuc").addClass("AnHienLoad");
+	    				}
+	    			}
+	    		);
+	    	}
+	    	else
+	    	{
+	    		if(ViTri=solamtron)
+	    		{
+	    			$("#XemThemTinTuc").addClass("AnHienLoad");
+	    		}
+	    	}
+	    }
+	
+	</script>
+	</div>
+</body>
+</html>

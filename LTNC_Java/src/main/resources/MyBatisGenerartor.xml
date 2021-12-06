@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+
+  <context id="DB2Tables" targetRuntime="MyBatis3">
+    <jdbcConnection driverClass="com.microsoft.sqlserver.jdbc.SQLServerDriver"
+        connectionURL="jdbc:sqlserver://localhost;databaseName=WebBanHang"
+        userId="saadmin"
+        password="123456">
+    </jdbcConnection>
+
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+
+    <javaModelGenerator targetPackage="com.LTNC.LTNC_Java.model" targetProject="LTNC_Java">
+    </javaModelGenerator>
+
+    <sqlMapGenerator targetPackage="com.LTNC.LTNC_Java.mapper.sql"  targetProject="LTNC_Java/src/main/resources">
+    </sqlMapGenerator>
+
+    <javaClientGenerator type="XMLMAPPER" targetPackage="com.LTNC.LTNC_Java.mapper"  targetProject="LTNC_Java">
+    </javaClientGenerator>
+
+    <table tableName="TinTuc" domainObjectName="TinTuc" >
+    </table>
+    
+    <table tableName="Users" domainObjectName="Users" >
+    </table>
+    
+    <table tableName="DonHang" domainObjectName="DonHang" >
+    </table>
+    
+    <table tableName="DanhGia" domainObjectName="DanhGia" >
+    </table>
+    
+    <table tableName="CT_DonHang" domainObjectName="CT_DonHang" >
+    </table>
+    
+    <table tableName="Anh" domainObjectName="Anh" >
+    </table>
+    
+    <table tableName="SanPham" domainObjectName="SanPham" >
+    </table>
+    
+    <table tableName="LoaiSp" domainObjectName="LoaiSp" >
+    </table>
+    
+    <table tableName="ThuongHieu" domainObjectName="ThuongHieu" >
+    </table>
+    
+    <table tableName="LienHe" domainObjectName="LienHe" >
+    </table>
+    
+    <table tableName="KhachHang" domainObjectName="KhachHang" >
+    </table>
+  </context>
+</generatorConfiguration>

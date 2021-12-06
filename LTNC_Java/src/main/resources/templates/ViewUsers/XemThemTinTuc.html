@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+	<div class="news__cat__item"  th:each="DanhSachTinTucTiepTheo:${DanhSachTinTucTiepTheo}">
+	   <div class="news__image">
+	       <a href="#">
+	           <img th:src="@{${'Image/' + DanhSachTinTucTiepTheo['anh']}}" alt="">
+	       </a>
+	   </div>
+	   <h4 class="news__title">
+	       <a  th:href="@{/TinTuc/TinTucChiTiet/{idTin}(idTin=${DanhSachTinTucTiepTheo['idTin']})}" th:text="${DanhSachTinTucTiepTheo['tieuDe']}"></a>
+	   </h4>
+	   <div class="news__date">
+	       <span class="-ap icon icon-access_time"></span>
+	       <span th:text="${DanhSachTinTucTiepTheo['ngayTao']}"></span>
+	   </div>
+	   <div class="news__shortdesc" style="display: -webkit-box;max-width: 100%;-webkit-line-clamp: 4;-webkit-box-orient: vertical;overflow: hidden;" th:text="${DanhSachTinTucTiepTheo['noiDung']}">
+	       
+	   </div>
+	   <div class="clearfix"></div>
+	</div>
+</body>
+</html>

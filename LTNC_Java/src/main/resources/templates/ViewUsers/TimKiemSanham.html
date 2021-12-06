@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+<section class="sec sec__product__list">
+	<div class="container">
+		<input type="hidden" id="SoLuongSanPham" th:attr="value = ${SoLuongSanPham}"/>
+		<div class="product-list__head">
+			<h2 class="product-list__title">
+				Danh sách sản phẩm
+			</h2>
+		</div>
+		<div class="product-list__wrap">
+			<div class="row" id="DanhSach_SanPham">
+				<div class="product__item" th:each="DanhSachSanPham:${DanhSachSanPham}">
+					<div class="product__image">
+						<a href="javascript:void(0)" class="product__link"><img th:src="@{${'/Image/' + DanhSachSanPham['anhDaiDien']}}" alt="name your product"></a>
+						<div class="product-item__actions">
+							<button class="btn btn-cart" th:onclick="'javascript:ThemGioHang(\''+ ${DanhSachSanPham['idSp']} +'\');'">Thêm vào giỏ</button>
+							<a href="javascript:void(0)" class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết" th:href="@{/SanPhamChiTiet/{IdSanPham}(IdSanPham=${DanhSachSanPham['idSp']})}"><span class="-ap  icon-search2"></span></a>
+							<a href="javascript:void(0)" class="btn btn-quickview"  th:onclick="'javascript:XemNhanhSanPham(\''+ ${DanhSachSanPham['idSp']} +'\')'" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
+						</div>
+						<div class="product__overlay"></div>
+						<th:block th:if="${DanhSachSanPham['MieuTaSanPhamNoiBat']=='HOT'}">
+							<div class="product__status -hot"  th:text="${DanhSachSanPham['MieuTaSanPhamNoiBat']}"></div>
+						</th:block>
+						<th:block th:if="${DanhSachSanPham['MieuTaSanPhamNoiBat']=='NEW'}">
+							<div class="product__status -new" th:text="${DanhSachSanPham['MieuTaSanPhamNoiBat']}"></div>
+						</th:block>
+						<th:block th:if="${DanhSachSanPham['MieuTaSanPhamNoiBat']!='NEW'} and ${DanhSachSanPham['MieuTaSanPhamNoiBat']!='HOT'} and ${DanhSachSanPham['MieuTaSanPhamNoiBat']!=null}">
+							<div class="product__sale" th:text="${DanhSachSanPham['MieuTaSanPhamNoiBat']}"></div>
+						 </th:block>
+					</div>
+					<h3 class="product__name"><a th:href="@{/SanPhamChiTiet/{IdSanPham}(IdSanPham=${DanhSachSanPham['idSp']})}" th:text="${DanhSachSanPham.ten}"></a></h3>
+					<div class="product__price">
+						<th:block th:if="${DanhSachSanPham['giaKm']}">
+								<div class="product__price__old"><span th:text="${DanhSachSanPham['giaKm']}">đ</span><span class="unit">đ</span></div>
+						 </th:block>
+						<div class="product__price__regular"><span th:text="${DanhSachSanPham['gia']}"></span><span class="unit">đ</span></div>
+					</div>
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>
+	<script>
+      $(document).ready(function() {
+			$(".catalog__item").removeClass("active");
+			$(".layout_menu_sanPham").addClass("active");
+		});	
+     CKEDITOR.replace( 'editor1' );
+ </script>
+</section>
+</body>
+</html>

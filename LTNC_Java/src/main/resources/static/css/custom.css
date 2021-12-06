@@ -1,0 +1,30 @@
+.DanhGia {
+  border: 2px solid #ccc;
+  background-color: #eee;
+  border-radius: 5px;
+  padding: 16px;
+  margin: 16px 0
+}
+
+.DanhGia::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+.DanhGia img {
+  float: left;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+.DanhGia span {
+  font-size: 20px;
+  margin-right: 15px;
+}
+.swal2-cancel{
+	margin-left: 5px;
+}
+.AnHienLoad{
+	display:none;
+}

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<li class="catalog-sub__item" th:each="DanhSachThuongHieu: ${DanhSachThuongHieu}">
+		<a th:href="@{/DanhSachSanPhamThuongHieu/{idthuonghieu}(idthuonghieu=${DanhSachThuongHieu['idThuongHieu']})}" class="catalog-sub__link"><span class="fa fa-caret-right icon"></span><span th:text="${DanhSachThuongHieu['tenThuongHieu']}"></span></a>
+	</li>
+</body>
+</html>

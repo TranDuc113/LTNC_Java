@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Insert title here</title>
+</head>
+<body>
+	 <div class="product__item" th:each="DanhSachSanPhamTiepTheo:${DanhSachSanPhamTiepTheo}">
+       <div class="product__image">
+           <a href="#" class="product__link"><img th:src="@{${'Image/' + DanhSachSanPhamTiepTheo['anhDaiDien']}}" alt="name your product"></a>
+           <div class="product-item__actions">
+               <button class="btn btn-cart" th:onclick="'javascript:ThemGioHang(\''+ ${DanhSachSanPhamTiepTheo['idSp']} +'\');'">Thêm vào giỏ</button>
+               <a class="btn btn-detail" data-toggle="tooltip" data-placement="left" title="Chi tiết"><span class="-ap  icon-search2"></span></a>
+               <a class="btn btn-quickview"  th:onclick="'javascript:XemNhanhSanPham(\''+ ${DanhSachSanPhamTiepTheo['idSp']} +'\')'" data-placement="top" title="Xem nhanh"><span class="fa fa-eye"></span></a>
+           </div>
+           <div class="product__overlay"></div>
+           <th:block th:if="${DanhSachSanPhamTiepTheo['MieuTaSanPhamNoiBat']=='HOT'}">
+              	<div class="product__status -hot"  th:text="${DanhSachSanPhamTiepTheo['MieuTaSanPhamNoiBat']}"></div>
+           </th:block>
+           <th:block th:if="${DanhSachSanPhamTiepTheo['MieuTaSanPhamNoiBat']=='NEW'}">
+              	<div class="product__status -new" th:text="${DanhSachSanPhamTiepTheo['MieuTaSanPhamNoiBat']}"></div>
+           </th:block>
+           <th:block th:if="${DanhSachSanPhamTiepTheo['MieuTaSanPhamNoiBat']!='NEW'} and ${DanhSachSanPhamTiepTheo['MieuTaSanPhamNoiBat']!='HOT'} and ${DanhSachSanPhamTiepTheo['MieuTaSanPhamNoiBat']!=null}">
+              	<div class="product__sale" th:text="${DanhSachSanPhamTiepTheo['MieuTaSanPhamNoiBat']}"></div>
+          	</th:block>
+       </div>
+       <h3 class="product__name"><a href="#" th:text="${DanhSachSanPhamTiepTheo.ten}">Tiêu đề sản phẩm mẫu </a></h3>
+       <div class="product__price">
+           <th:block th:if="${DanhSachSanPhamTiepTheo['giaKm']}">
+            	<div class="product__price__old"><span th:text="${DanhSachSanPhamTiepTheo['giaKm']}">đ</span><span class="unit">đ</span></div>
+         </th:block>
+           <div class="product__price__regular"><span th:text="${DanhSachSanPhamTiepTheo['gia']}"></span><span class="unit">đ</span></div>
+       </div>
+   </div>
+</body>
+</html>
